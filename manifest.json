@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.lectio.dk/*"],
-      "js": ["src/load.js", "src/custom_header.js", "src/no_pp.js", "src/wide.js"]
+      "js": ["src/load.js", "src/custom_header.js", "src/no_pp.js", "src/ui_cleanup.js", "src/wide.js"]
     },
     {
       "matches": ["*://*.lectio.dk/*/AdgangIndstillinger.aspx?*"],

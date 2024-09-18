@@ -192,3 +192,45 @@ for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
 }
 
 lsContentContainer.appendChild(assignmentsContainer.section);
+
+// UI SETTINGS
+const uiContainer = newLectioContainer("UI");
+
+// Hide title
+const hideTitle = newSettingsItem("settings-lectio-hide-title", "checkbox", "Hide title");
+
+hideTitle.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-hide-title", hideTitle.input.checked);
+  location.reload();
+});
+
+uiContainer.contentContainer.appendChild(hideTitle.span);
+
+const singleBar = newSettingsItem("settings-lectio-single-bar", "checkbox", "Single bar");
+
+singleBar.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-single-bar", singleBar.input.checked);
+  location.reload();
+});
+
+uiContainer.contentContainer.appendChild(singleBar.span);
+
+const hideTopbar = newSettingsItem("settings-lectio-hide-topbar", "checkbox", "Hide topbar");
+
+hideTopbar.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-hide-topbar", hideTopbar.input.checked);
+  location.reload();
+});
+
+uiContainer.contentContainer.appendChild(hideTopbar.span);
+
+const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox", "Center topbar");
+
+centerTopbar.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-center-topbar", centerTopbar.input.checked);
+  location.reload();
+});
+
+uiContainer.contentContainer.appendChild(centerTopbar.span);
+
+lsContentContainer.appendChild(uiContainer.section);

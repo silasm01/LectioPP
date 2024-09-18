@@ -15,6 +15,11 @@ fix_null("settings-assignment-timer-colors-green", "#00ff00");
 fix_null("settings-assignment-names", "false");
 fix_null("settings-auto-redirect", "false");
 
+fix_null("settings-lectio-hide-title", "false");
+fix_null("settings-lectio-single-bar", "false");
+fix_null("settings-lectio-hide-topbar", "false");
+fix_null("settings-lectio-center-topbar", "false");
+
 if (location.href.match(/\/lectio\/(\d+)\/*/) && localStorage.getItem("settings-school-id") === "null") {
   const schoolid = location.href.match(/\/(\d+)\//);
   localStorage.setItem("settings-school-id", schoolid[1]);

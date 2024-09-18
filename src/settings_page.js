@@ -14,4 +14,7 @@ if (location.href.includes("?lectiopp")) {
 
   var lectioppbutton = document.getElementById("s_m_HeaderContent_subnavigator_ctl13")
   lectioppbutton.parentElement.classList = "buttonlink ls-subnav-active"
+
+  var title = document.getElementById("s_m_HeaderContent_MainTitle")
+  title.childNodes[1].textContent = "Lectio++"
 }
