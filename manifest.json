@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "A free and open source browser extension for Lectio with QoL features.",
   "icons": {
-    "128": "src/img/l++.png"
+    "96": "src/img/96x96.png"
   },
   "content_scripts": [
     {
