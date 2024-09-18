@@ -11,10 +11,10 @@ function update_time(assignmentDate, row, dateStr) {
     row.cells[3].innerText = `${dateStr}\n(${days}d ${hours}h ${minutes}m)`;
     
     if (localStorage.getItem('settings-assignment-timer-colors-enable') === "true") {
-      if (days < 7) {
-        row.cells[3].style.backgroundColor = localStorage.getItem('settings-assignment-timer-colors-yellow');
-      } else if (days < 1) {
+      if (days < 1) {
         row.cells[3].style.backgroundColor = localStorage.getItem('settings-assignment-timer-colors-red');
+      } else if (days < 7) {
+        row.cells[3].style.backgroundColor = localStorage.getItem('settings-assignment-timer-colors-yellow');
       } else {
         row.cells[3].style.backgroundColor = localStorage.getItem('settings-assignment-timer-colors-green');
       }
