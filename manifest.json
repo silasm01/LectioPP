@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Lectio++",
+  "version": "1.0",
+  "description": "A free and open source browser extension for Lectio with QoL features.",
+  "content_scripts": [
+    {
+      "matches": ["*://*.lectio.dk/*"],
+      "js": ["src/load.js", "src/no_pp.js", "src/wide.js"]
+    },
+    {
+      "matches": ["*://*.lectio.dk/*/AdgangIndstillinger.aspx"],
+      "js": ["src/settings.js"]
+    },
+    {
+      "matches": ["*://*.lectio.dk/*/OpgaverElev.aspx"],
+      "js": ["src/lib/assignments.js", "src/reverse_assignments.js", "src/assignment_filters.js", "src/assignment_timer.js", "src/assignment_names.js"]
+    },
+    {
+      "matches": ["*://*.lectio.dk/"],
+      "js": ["src/redirect.js"]
+    }
+  ]
+}
