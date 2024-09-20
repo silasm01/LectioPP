@@ -41,3 +41,20 @@ if (sessionStorage.getItem('reload') === 'false') {
 }
 
 sessionStorage.setItem('reload', 'false');
+
+var fagList = document.getElementById("s_m_Content_Content_holdElementLinkList")
+
+if (!fagList && localStorage.getItem("settings-lectio-faglist") === null) {
+  localStorage.setItem("settings-lectio-faglist", JSON.stringify([]))
+} else if (localStorage.getItem("settings-lectio-faglist") === JSON.stringify([])) {
+  fagList = fagList.childNodes[1].childNodes[1].childNodes[0].childNodes[2].childNodes[0]
+  let fagl = []
+  for (fag of fagList.childNodes) {
+    for (t of fag.childNodes) {
+      if (t.href != null) {
+        fagl.push(t.innerText)
+      }
+    }
+  }
+  localStorage.setItem("settings-lectio-faglist", JSON.stringify(fagl))
+}

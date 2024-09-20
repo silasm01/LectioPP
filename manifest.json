@@ -22,6 +22,10 @@
     {
       "matches": ["*://*.lectio.dk/"],
       "js": ["src/redirect.js"]
+    },
+    {
+      "matches": ["*://*.lectio.dk/*/SkemaNy.aspx*"],
+      "js": ["src/schedule_names.js"]
     }
   ]
 }

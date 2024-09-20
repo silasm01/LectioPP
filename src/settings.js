@@ -19,12 +19,17 @@ function newLectioContainer(name) {
   section.appendChild(containerHeader);
   section.appendChild(contentContainer);
 
+  section.style.marginRight = "10px";
+
   return {section: section, contentContainer: contentContainer};
 }
 
-function newSettingsItem(id, type, text) {
+function newSettingsItem(id, type, text, b_text = "") {
   const span = document.createElement("span");
   span.id = `${id}-span`;
+
+  var label = document.createElement("label");
+  label.innerText = " " + text;
 
   var input;
 
@@ -35,11 +40,17 @@ function newSettingsItem(id, type, text) {
       input.id = `${id}-input`;
       input.classList.add = "settings-checkbox";
       input.checked = localStorage.getItem(id) === "true";
+
+      span.append(input);
+      span.append(label);
       break;
     case "select":
       input = document.createElement("select");
       input.id = `${id}-input`;
       input.classList.add = "settings-select";
+      
+      span.append(input);
+      span.append(label);
       break;
     case "color":
       input = document.createElement("input");
@@ -47,6 +58,9 @@ function newSettingsItem(id, type, text) {
       input.id = `${id}-input`;
       input.classList.add = "settings-color";
       input.value = localStorage.getItem(id);
+
+      span.append(input);
+      span.append(label);
       break;
     case "text":
       input = document.createElement("input");
@@ -54,20 +68,55 @@ function newSettingsItem(id, type, text) {
       input.id = `${id}-input`;
       input.classList.add = "settings-text";
       input.value = localStorage.getItem(id);
+
+      span.append(label.innerText += ": ");
+      span.append(document.createElement("br"));
+      span.append(input);
+      break;
+    case "button":
+      input = document.createElement("button");
+      input.textContent = text;
+      input.id = `${id}-input`;
+      input.classList.add = "settings-button";
+
+      span.append(input);
+      break;
+    case "text-button":
+      input = document.createElement("div");
+
+      const textInput = document.createElement("input");
+      textInput.type = "text";
+      textInput.id = `${id}-text-input`;
+      textInput.classList.add = "settings-text";
+      textInput.style.width = "130px";
+      textInput.value = localStorage.getItem(id);
+
+      const button = document.createElement("button");
+      button.textContent = b_text;
+      button.id = `${id}-button`;
+      button.classList.add = "settings-button";
+
+      input.appendChild(textInput);
+      input.appendChild(button);
+
+      span.append(label.innerText += ": ");
+      span.append(document.createElement("br"));
+      span.append(input);
       break;
   }
 
-  var label = document.createElement("label");
-  label.innerText = " " + text;
-
-  span.append(input);
-  span.append(label);
   span.append(document.createElement("br"));
 
   return {span: span, input: input};
 }
 
 var lsContentContainer = document.querySelector("#contenttable.ls-content");
+
+var contentable = document.getElementById("contenttable");
+
+contentable.style.display = "flex";
+contentable.style.justifyContent = "center";
+contentable.style.alignItems = "flex-start";
 
 // MISC SETTINGS
 const miscContainer = newLectioContainer("Miscellaneous");
@@ -95,6 +144,7 @@ const autoRedirect = newSettingsItem("settings-auto-redirect", "checkbox", "Redi
 
 autoRedirect.input.addEventListener('change', function() {
   localStorage.setItem("settings-auto-redirect", autoRedirect.input.checked);
+  location.reload();
 });
 
 miscContainer.contentContainer.appendChild(autoRedirect.span);
@@ -108,6 +158,57 @@ if (localStorage.getItem("settings-auto-redirect") === "true") {
 
   miscContainer.contentContainer.appendChild(schoolid.span);
 }
+
+// Assignment names
+const assignmentNames = newSettingsItem("settings-assignment-names", "checkbox", "Use custom assignment names");
+
+assignmentNames.input.addEventListener('change', function() {
+  localStorage.setItem("settings-assignment-names", assignmentNames.input.checked);
+  location.reload();
+});
+
+miscContainer.contentContainer.appendChild(assignmentNames.span);
+
+if (localStorage.getItem("settings-assignment-names") === "true") {
+  const lectureNameContainer = newLectioContainer("Custom assignment names");
+
+  const lectureNames = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
+
+  for (let lecture of lectureNames) {
+    const lectureName = newSettingsItem(`settings-lectio-fagname-${lecture}`, "text-button", lecture, "Delete");
+
+    lectureName.input.children[1].addEventListener('click', function() {
+      const newLectureNames = lectureNames.filter((name) => name !== lecture);
+      localStorage.setItem(`settings-lectio-faglist`, JSON.stringify(newLectureNames));
+      localStorage.removeItem(`settings-lectio-fagname-${lecture}`);
+
+      location.reload();
+    });
+
+    lectureName.input.children[0].addEventListener('change', function() {
+      localStorage.setItem(`settings-lectio-fagname-${lecture}`, lectureName.input.children[0].value);
+    });
+
+    lectureNameContainer.contentContainer.appendChild(lectureName.span);
+  }
+
+  lectureNameContainer.contentContainer.appendChild(document.createElement("br"));
+
+  const addLecture = newSettingsItem("settings-lectio-fagname-add", "text-button", "Add lecture", "Add");
+
+  addLecture.input.children[1].addEventListener('click', function() {
+    const lectureName = addLecture.input.children[0].value;
+    localStorage.setItem(`settings-lectio-faglist`, JSON.stringify([...lectureNames, lectureName]));
+
+    location.reload();
+  });
+
+  lectureNameContainer.contentContainer.appendChild(addLecture.span);
+
+  miscContainer.contentContainer.appendChild(document.createElement("br"));
+  miscContainer.contentContainer.appendChild(lectureNameContainer.section);
+  miscContainer.contentContainer.appendChild(document.createElement("br"));
+  }
 
 lsContentContainer.appendChild(miscContainer.section);
 
@@ -172,15 +273,6 @@ reverseAssignments.input.addEventListener('change', function() {
 
 assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
 
-// Assignment names
-const assignmentNames = newSettingsItem("settings-assignment-names", "checkbox", "Use custom assignment names");
-
-assignmentNames.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-names", assignmentNames.input.checked);
-});
-
-assignmentsContainer.contentContainer.appendChild(assignmentNames.span);
-
 // Assignment filters
 for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
   const filterItem = newSettingsItem(`settings-assignment-filter-${filter}`, "checkbox", filter);
@@ -192,6 +284,8 @@ for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
 }
 
 lsContentContainer.appendChild(assignmentsContainer.section);
+
+lsContentContainer.appendChild(document.createElement("br"));
 
 // UI SETTINGS
 const uiContainer = newLectioContainer("UI");
@@ -232,5 +326,15 @@ centerTopbar.input.addEventListener('change', function() {
 });
 
 uiContainer.contentContainer.appendChild(centerTopbar.span);
+
+// Remove footer
+const removeFooter = newSettingsItem("settings-lectio-remove-footer", "checkbox", "Remove footer");
+
+removeFooter.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-remove-footer", removeFooter.input.checked);
+  location.reload();
+});
+
+uiContainer.contentContainer.appendChild(removeFooter.span);
 
 lsContentContainer.appendChild(uiContainer.section);
