@@ -1,4 +1,4 @@
-function newLectioContainer(name) {
+function newLectioContainer(name, defaultOpen = true) {
   const section = document.createElement('section');
   section.classList = "island";
 
@@ -6,6 +6,13 @@ function newLectioContainer(name) {
   containerHeader.setAttribute("role", "heading");
   containerHeader.classList = "islandHeaderContainer"
   containerHeader.style = "background-image: none; background-color: rgb(211, 229, 245);";
+
+  containerHeader.style.cursor = "pointer";
+  containerHeader.addEventListener('click', function() {
+    const isCollapsed = contentContainer.style.display === "none";
+    contentContainer.style.display = isCollapsed ? "block" : "none";
+  });
+
   const spanHeader = document.createElement("span");
   spanHeader.innerText = name;
   spanHeader.className = "islandHeader";
@@ -15,6 +22,8 @@ function newLectioContainer(name) {
   const contentContainer = document.createElement("div");
   contentContainer.id = "s_m_Content_Content_ils_pa";
   contentContainer.className = "islandContent";
+
+  contentContainer.style.display = defaultOpen ? "block" : "none";
 
   section.appendChild(containerHeader);
   section.appendChild(contentContainer);
@@ -170,7 +179,7 @@ assignmentNames.input.addEventListener('change', function() {
 miscContainer.contentContainer.appendChild(assignmentNames.span);
 
 if (localStorage.getItem("settings-assignment-names") === "true") {
-  const lectureNameContainer = newLectioContainer("Custom assignment names");
+  const lectureNameContainer = newLectioContainer("Custom assignment names", false);
 
   const lectureNames = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
 
@@ -227,7 +236,7 @@ assignmentTimer.input.addEventListener('change', function() {
 assignmentsContainer.contentContainer.appendChild(assignmentTimer.span);
 
 // Assignment timer colors
-const assignmentTimerColors = newLectioContainer("Assignment timer colors");
+const assignmentTimerColors = newLectioContainer("Assignment timer colors", false);
 
 const enable_colors = newSettingsItem("settings-assignment-timer-colors-enable", "checkbox", "Enable colors");
 
