@@ -1,4 +1,4 @@
-if (localStorage.getItem("settings-reverse-assignments") === "true") {
+if (localStorage.getItem("settings-lectio-reverse-assignments") === "true") {
   let tbody = document.querySelector("tbody");
 
   let rows = Array.from(tbody.querySelectorAll('tr')).slice(1);

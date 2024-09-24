@@ -1,4 +1,4 @@
-if (localStorage.getItem("settings-assignment-names") === 'true') {
+if (localStorage.getItem("settings-lectio-assignment-names") === 'true') {
   var lectures = document.getElementsByClassName("s2skemabrik s2bgbox  s2brik lec-context-menu-instance")
   for (var lecture of lectures) {
     lecture = lecture.childNodes[1].childNodes

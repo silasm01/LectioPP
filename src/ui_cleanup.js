@@ -15,7 +15,7 @@ if (localStorage.getItem('settings-lectio-single-bar') === 'true') {
     var div = document.createElement("div")
     div.classList = "buttonlink"
 
-    const school_id = localStorage.getItem("settings-school-id")
+    const school_id = localStorage.getItem("settings-lectio-school-id")
 
     var a = document.createElement("a")
     a.href = `https://www.lectio.dk/lectio/${school_id}/default.aspx`
@@ -78,7 +78,7 @@ if (localStorage.getItem('settings-lectio-center-topbar') === 'true') {
     var islands = document.querySelectorAll(".island");
     for (var island of islands) {
       if (!island.parentNode.classList.contains("ls-std-island-layout-ltr")) {
-        island.style.margin = "0px auto"
+        island.style.margin = "10px auto"
       }
     }
   }

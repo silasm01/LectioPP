@@ -16,11 +16,11 @@ function add_toggle(id, text) {
   var input = document.createElement("input");
   input.type = "checkbox";
   input.id = `s_m_Content_Content_${id}CB`;
-  input.checked = get_ses_or_loc(`settings-assignment-filter-${id}`) === "true";
+  input.checked = get_ses_or_loc(`settings-lectio-assignment-filter-${id}`) === "true";
 
   input.addEventListener('change', function() {
     sessionStorage.setItem('reload', 'true');
-    sessionStorage.setItem(`settings-assignment-filter-${id}`, input.checked);
+    sessionStorage.setItem(`settings-lectio-assignment-filter-${id}`, input.checked);
     location.reload();
   });
 
@@ -36,7 +36,7 @@ function add_toggle(id, text) {
 
 // hideDelivered
 add_toggle("hideDelivered", "Hide delivered");
-if (get_ses_or_loc("settings-assignment-filter-hideDelivered") === "true") {
+if (get_ses_or_loc("settings-lectio-assignment-filter-hideDelivered") === "true") {
   for (let row of check_assignment_filter([[5, "Venter"]])) {
     row.style.display = "none";
   }
@@ -44,7 +44,7 @@ if (get_ses_or_loc("settings-assignment-filter-hideDelivered") === "true") {
 
 // showAnswered
 add_toggle("showAnswered", "Show answered");
-if (get_ses_or_loc("settings-assignment-filter-showAnswered") === "true") {
+if (get_ses_or_loc("settings-lectio-assignment-filter-showAnswered") === "true") {
   for (let row of check_assignment_filter([[7, "Elev"],[5, "Afleveret"]])) {
     row.style.display = "none";
   }

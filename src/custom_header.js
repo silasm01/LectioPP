@@ -4,7 +4,7 @@ if (tab != null) {
   var settingstab = document.createElement("div")
   settingstab.classList = "buttonlink"
 
-  const schoolid = localStorage.getItem("settings-school-id")
+  const schoolid = localStorage.getItem("settings-lectio-school-id")
 
   var settingstablink = document.createElement("a")
   settingstablink.href = `https://www.lectio.dk/lectio/${schoolid}/indstillinger/AdgangIndstillinger.aspx?lectiopp`

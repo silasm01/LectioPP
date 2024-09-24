@@ -149,36 +149,36 @@ miscContainer.contentContainer.appendChild(no_pp.span);
 miscContainer.contentContainer.appendChild(wide.span);
 
 // Auto redirect
-const autoRedirect = newSettingsItem("settings-auto-redirect", "checkbox", "Redirect to main page");
+const autoRedirect = newSettingsItem("settings-lectio-auto-redirect", "checkbox", "Redirect to main page");
 
 autoRedirect.input.addEventListener('change', function() {
-  localStorage.setItem("settings-auto-redirect", autoRedirect.input.checked);
+  localStorage.setItem("settings-lectio-auto-redirect", autoRedirect.input.checked);
   location.reload();
 });
 
 miscContainer.contentContainer.appendChild(autoRedirect.span);
 
-if (localStorage.getItem("settings-auto-redirect") === "true") {
-  const schoolid = newSettingsItem("settings-school-id", "text", "School ID");
+if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
+  const schoolid = newSettingsItem("settings-lectio-school-id", "text", "School ID");
 
   schoolid.input.addEventListener('change', function() {
-    localStorage.setItem("settings-school-id", schoolid.input.value);
+    localStorage.setItem("settings-lectio-school-id", schoolid.input.value);
   });
 
   miscContainer.contentContainer.appendChild(schoolid.span);
 }
 
 // Assignment names
-const assignmentNames = newSettingsItem("settings-assignment-names", "checkbox", "Use custom assignment names");
+const assignmentNames = newSettingsItem("settings-lectio-assignment-names", "checkbox", "Use custom assignment names");
 
 assignmentNames.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-names", assignmentNames.input.checked);
+  localStorage.setItem("settings-lectio-assignment-names", assignmentNames.input.checked);
   location.reload();
 });
 
 miscContainer.contentContainer.appendChild(assignmentNames.span);
 
-if (localStorage.getItem("settings-assignment-names") === "true") {
+if (localStorage.getItem("settings-lectio-assignment-names") === "true") {
   const lectureNameContainer = newLectioContainer("Custom assignment names", false);
 
   const lectureNames = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
@@ -268,34 +268,34 @@ assignmentsContainer.contentContainer.appendChild(assignmentTimer.span);
 // Assignment timer colors
 const assignmentTimerColors = newLectioContainer("Assignment timer colors", false);
 
-const enable_colors = newSettingsItem("settings-assignment-timer-colors-enable", "checkbox", "Enable colors");
+const enable_colors = newSettingsItem("settings-lectio-assignment-timer-colors-enable", "checkbox", "Enable colors");
 
 enable_colors.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-timer-colors-enable", enable_colors.input.checked);
+  localStorage.setItem("settings-lectio-assignment-timer-colors-enable", enable_colors.input.checked);
   location.reload();
 });
 
 assignmentsContainer.contentContainer.appendChild(enable_colors.span);
 
 const textColor = newSettingsItem("settings-lectio-assignment-timer-textColor", "color", "Text color");
-const red = newSettingsItem("settings-assignment-timer-colors-red", "color", "Red");
-const yellow = newSettingsItem("settings-assignment-timer-colors-yellow", "color", "Yellow");
-const green = newSettingsItem("settings-assignment-timer-colors-green", "color", "Green");
+const red = newSettingsItem("settings-lectio-assignment-timer-colors-red", "color", "Red");
+const yellow = newSettingsItem("settings-lectio-assignment-timer-colors-yellow", "color", "Yellow");
+const green = newSettingsItem("settings-lectio-assignment-timer-colors-green", "color", "Green");
 
 textColor.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-assignment-timer-textColor", textColor.input.value);
 });
 
 red.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-timer-colors-red", red.input.value);
+  localStorage.setItem("settings-lectio-assignment-timer-colors-red", red.input.value);
 });
 
 yellow.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-timer-colors-yellow", yellow.input.value);
+  localStorage.setItem("settings-lectio-assignment-timer-colors-yellow", yellow.input.value);
 });
 
 green.input.addEventListener('change', function() {
-  localStorage.setItem("settings-assignment-timer-colors-green", green.input.value);
+  localStorage.setItem("settings-lectio-assignment-timer-colors-green", green.input.value);
 });
 
 assignmentTimerColors.contentContainer.appendChild(textColor.span);
@@ -303,17 +303,17 @@ assignmentTimerColors.contentContainer.appendChild(red.span);
 assignmentTimerColors.contentContainer.appendChild(yellow.span);
 assignmentTimerColors.contentContainer.appendChild(green.span);
 
-if (localStorage.getItem("settings-assignment-timer-colors-enable") === "true") {
+if (localStorage.getItem("settings-lectio-assignment-timer-colors-enable") === "true") {
   assignmentsContainer.contentContainer.appendChild(document.createElement("br"));
   assignmentsContainer.contentContainer.appendChild(assignmentTimerColors.section);
   assignmentsContainer.contentContainer.appendChild(document.createElement("br"));
 }  
 
 // Reverse assignments order
-const reverseAssignments = newSettingsItem("settings-reverse-assignments", "checkbox", "Reverse assignments order");
+const reverseAssignments = newSettingsItem("settings-lectio-reverse-assignments", "checkbox", "Reverse assignments order");
 
 reverseAssignments.input.addEventListener('change', function() {
-  localStorage.setItem("settings-reverse-assignments", reverseAssignments.input.checked);
+  localStorage.setItem("settings-lectio-reverse-assignments", reverseAssignments.input.checked);
 });
 
 assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
@@ -322,10 +322,10 @@ assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
 const defaultFiltersContainer = newLectioContainer("Default filters", true);
 
 // Assignment filters
-for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
-  const filterItem = newSettingsItem(`settings-assignment-filter-${filter}`, "checkbox", filter);
+for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
+  const filterItem = newSettingsItem(`settings-lectio-assignment-filter-${filter}`, "checkbox", filter);
   filterItem.input.addEventListener('change', function() {
-    localStorage.setItem(`settings-assignment-filter-${filter}`, filterItem.input.checked);
+    localStorage.setItem(`settings-lectio-assignment-filter-${filter}`, filterItem.input.checked);
   });
 
   defaultFiltersContainer.contentContainer.appendChild(filterItem.span);
