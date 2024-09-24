@@ -4,7 +4,10 @@ if (localStorage.getItem("settings-assignment-names") === "true") {
     const faglist = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
     for (fag of faglist) {
       if (fag === course) {
-        row.cells[1].innerText = localStorage.getItem(`settings-lectio-fagname-${fag}`)
+        var fagname = localStorage.getItem(`settings-lectio-fagname-${fag}`);
+        if (fagname) {
+          row.cells[1].innerText = fagname
+        }
       }
     }
   });

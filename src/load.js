@@ -46,7 +46,7 @@ var fagList = document.getElementById("s_m_Content_Content_holdElementLinkList")
 
 if (!fagList && localStorage.getItem("settings-lectio-faglist") === null) {
   localStorage.setItem("settings-lectio-faglist", JSON.stringify([]))
-} else if (localStorage.getItem("settings-lectio-faglist") === JSON.stringify([])) {
+} else if (localStorage.getItem("settings-lectio-faglist") === JSON.stringify([]) && fagList) {
   fagList = fagList.childNodes[1].childNodes[1].childNodes[0].childNodes[2].childNodes[0]
   let fagl = []
   for (fag of fagList.childNodes) {
@@ -57,4 +57,14 @@ if (!fagList && localStorage.getItem("settings-lectio-faglist") === null) {
     }
   }
   localStorage.setItem("settings-lectio-faglist", JSON.stringify(fagl))
+}
+
+fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"))
+
+if (fagList) {
+  for (fag of fagList) {
+    if (localStorage.getItem(`settings-lectio-schedule-color-${fag}`) === null) {
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, `#` + Math.floor(Math.random()*16777215/3).toString(16).padEnd(6,0));
+    }
+  }
 }

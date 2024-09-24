@@ -217,7 +217,37 @@ if (localStorage.getItem("settings-assignment-names") === "true") {
   miscContainer.contentContainer.appendChild(document.createElement("br"));
   miscContainer.contentContainer.appendChild(lectureNameContainer.section);
   miscContainer.contentContainer.appendChild(document.createElement("br"));
+
+}
+
+// Custom schedule colors
+
+const enable_colors_schedule = newSettingsItem("settings-lectio-schedule-colors-enable", "checkbox", "Enable colors");
+
+enable_colors_schedule.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-schedule-colors-enable", enable_colors_schedule.input.checked);
+  location.reload();
+});
+
+miscContainer.contentContainer.appendChild(enable_colors_schedule.span);
+
+if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
+  const colorContainer = newLectioContainer("Custom schedule colors", false);
+
+  const fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
+  
+  for (let fag of fagList) {
+    const colorPicker = newSettingsItem(`settings-lectio-schedule-color-${fag}`, "color", fag)
+
+    colorPicker.input.addEventListener('change', function() {
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, colorPicker.input.value);
+    });
+
+    colorContainer.contentContainer.appendChild(colorPicker.span)
   }
+
+  miscContainer.contentContainer.appendChild(colorContainer.section)
+}
 
 lsContentContainer.appendChild(miscContainer.section);
 
@@ -282,6 +312,9 @@ reverseAssignments.input.addEventListener('change', function() {
 
 assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
 
+// Default filters
+const defaultFiltersContainer = newLectioContainer("Default filters", true);
+
 // Assignment filters
 for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
   const filterItem = newSettingsItem(`settings-assignment-filter-${filter}`, "checkbox", filter);
@@ -289,8 +322,10 @@ for (let filter of JSON.parse(localStorage.getItem("assignment-filters"))) {
     localStorage.setItem(`settings-assignment-filter-${filter}`, filterItem.input.checked);
   });
 
-  assignmentsContainer.contentContainer.appendChild(filterItem.span);
+  defaultFiltersContainer.contentContainer.appendChild(filterItem.span);
 }
+
+assignmentsContainer.contentContainer.appendChild(defaultFiltersContainer.section);
 
 lsContentContainer.appendChild(assignmentsContainer.section);
 

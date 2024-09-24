@@ -1,12 +1,3 @@
-function set_sub_nodes(root) {
-  for (node of root.childNodes) {
-    if (node.classList.includes("island")) {
-      set_sub_nodes(node)
-      node.style.margin = "auto"
-    }
-  }
-}
-
 if (localStorage.getItem('settings-lectio-hide-title') === 'true') {
   var title = document.getElementById("s_m_HeaderContent_MainTitle")
   if (title) {
@@ -69,16 +60,26 @@ if (localStorage.getItem('settings-lectio-center-topbar') === 'true') {
     topbardiv.style.margin = "auto"
   }
 
-  // FIX THIS
   var content = document.getElementById("contenttable")
   if (content) {
     content.style.display = "block"
     
-    // set_sub_nodes(content)
-    
+    var sets = document.getElementsByClassName("ls-std-island-layout-ltr");
+    for (set of sets) {
+      var childs = set.children
+      childs[0].style.marginLeft = "auto"
+      if (childs.length > 1) {
+        childs[1].style.marginRight = "auto"
+      } else {
+        childs[0].style.marginRight = "auto"
+      }
+    }
+
     var islands = document.querySelectorAll(".island");
-    for (island of islands) {
-      island.style.margin = "0px auto"
+    for (var island of islands) {
+      if (!island.parentNode.classList.contains("ls-std-island-layout-ltr")) {
+        island.style.margin = "0px auto"
+      }
     }
   }
 }
