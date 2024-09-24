@@ -14,7 +14,7 @@ A Lectio extension that improve the QOL of Lectio. This extension focuses on hav
 * More.
 
 # Getting started
-> ⚠️ Note: This extension is currently not available on any extension store as they either charge you money or have a two-factor in place that does not work. It might be added later but for now there will be instructions below to manually add it to Chrome and Firefox.
+> ⚠️ Note: This extension is currently not available on ~~any extension store~~ Firefox as they either charge you money or have a two-factor in place that does not work. It might be added later but for now there will be instructions below to manually add it to Chrome and Firefox.
 
 To get started you need to download the source. This can be done through git:
 ```
@@ -22,6 +22,8 @@ git clone https://github.com/silasm01/LectioPP
 ```
 The next steps are different dependent on browser. 
 ## Chrome
+The extension can be downloaded through the Chrome Extension Store at this [link](https://chromewebstore.google.com/detail/lectio++/ldjoanojmkabkhjkjaakpcgncbhogndp) although you might still want to manually install it as it is update more frequently.
+
 Any chrome or chromium based browser should be able to be added by following some easy steps. 
 The first step is to access the extension page and enabling the developer tools at the top. 
 
