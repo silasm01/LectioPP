@@ -277,9 +277,14 @@ enable_colors.input.addEventListener('change', function() {
 
 assignmentsContainer.contentContainer.appendChild(enable_colors.span);
 
+const textColor = newSettingsItem("settings-lectio-assignment-timer-textColor", "color", "Text color");
 const red = newSettingsItem("settings-assignment-timer-colors-red", "color", "Red");
 const yellow = newSettingsItem("settings-assignment-timer-colors-yellow", "color", "Yellow");
 const green = newSettingsItem("settings-assignment-timer-colors-green", "color", "Green");
+
+textColor.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-assignment-timer-textColor", textColor.input.value);
+});
 
 red.input.addEventListener('change', function() {
   localStorage.setItem("settings-assignment-timer-colors-red", red.input.value);
@@ -293,6 +298,7 @@ green.input.addEventListener('change', function() {
   localStorage.setItem("settings-assignment-timer-colors-green", green.input.value);
 });
 
+assignmentTimerColors.contentContainer.appendChild(textColor.span);
 assignmentTimerColors.contentContainer.appendChild(red.span);
 assignmentTimerColors.contentContainer.appendChild(yellow.span);
 assignmentTimerColors.contentContainer.appendChild(green.span);

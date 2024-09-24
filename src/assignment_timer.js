@@ -1,6 +1,7 @@
 function update_time(assignmentDate, row, dateStr) {
   const now = new Date();
   const timeDiff = assignmentDate - now;
+  row.cells[3].style.color = localStorage.getItem('settings-lectio-assignment-timer-textColor')
   if (timeDiff > 0 && row.cells[5].innerText === "Afleveret") {
     row.cells[3].innerText = `${dateStr}\n(Completed)`;
   } else if (timeDiff > 0) {

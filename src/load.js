@@ -12,6 +12,7 @@ fix_null("settings-reverse-assignments", "false");
 fix_null("settings-assignment-timer-colors-red", "#ff0000");
 fix_null("settings-assignment-timer-colors-yellow", "#ffff00");
 fix_null("settings-assignment-timer-colors-green", "#00ff00");
+fix_null("settings-lectio-assignment-timer-textColor", "#000000");
 fix_null("settings-assignment-names", "false");
 fix_null("settings-auto-redirect", "false");
 
