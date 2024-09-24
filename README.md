@@ -34,5 +34,5 @@ For Firefox you can install an extension by going to the debug page at ```about:
 Here you need to select the manifest to install it. After doing that it should be installed but you will have to be aware that it will not be installed upon a restart of Firefox. This unfortunately seems to be unavoidable and I will try to add it to the Firefox Marketplace as soon as the two-factor is working.
 
 # Usage
-Most of the features are self explanitory through the settings menu. The settings can be accessed by going to the ```Profil``` menu and ```Log``` submenu. Also be aware that some settings will only be visible once another setting has been enabled.
+Most of the features are self explanitory through the settings menu. ~~The settings can be accessed by going to the ```Profil``` menu and ```Log``` submenu.~~ The settings can be accessed through the ```Lectio++``` menu in the menubar. Also be aware that some settings will only be visible once another setting has been enabled.
 If any features are unclear feel free to ask through a Issue.
