@@ -234,6 +234,15 @@ miscContainer.contentContainer.appendChild(enable_colors_schedule.span);
 if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
   const colorContainer = newLectioContainer("Custom schedule colors", false);
 
+  const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-borders", "checkbox", "Canceled borders");
+
+  canceledBorder.input.addEventListener('change', function() {
+    localStorage.setItem("settings-lectio-schedule-canceled-borders", canceledBorder.input.checked);
+    location.reload();
+  });
+
+  colorContainer.contentContainer.appendChild(canceledBorder.span);
+
   const fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
   
   for (let fag of fagList) {

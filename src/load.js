@@ -20,6 +20,7 @@ fix_null("settings-lectio-hide-title", "false");
 fix_null("settings-lectio-single-bar", "false");
 fix_null("settings-lectio-hide-topbar", "false");
 fix_null("settings-lectio-center-topbar", "false");
+fix_null("settings-lectio-schedule-canceled-borders", "false");
 
 if (location.href.match(/\/lectio\/(\d+)\/*/) && localStorage.getItem("settings-lectio-school-id") === "null") {
   const schoolid = location.href.match(/\/(\d+)\//);
