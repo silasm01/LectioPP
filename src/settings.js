@@ -130,13 +130,6 @@ contentable.style.alignItems = "flex-start";
 // MISC SETTINGS
 const miscContainer = newLectioContainer("Miscellaneous");
 
-// Wide schedule
-const wide = newSettingsItem("settings-lectio-wide", "checkbox", "Wide schedule");
-
-wide.input.addEventListener('change', function() {
-  localStorage.setItem("settings-lectio-wide", wide.input.checked);
-});
-
 // Hide profile picture
 const no_pp = newSettingsItem("settings-lectio-no-pp", "checkbox", "Hide profile picture");
 
@@ -146,7 +139,6 @@ no_pp.input.addEventListener('change', function() {
 });
 
 miscContainer.contentContainer.appendChild(no_pp.span);
-miscContainer.contentContainer.appendChild(wide.span);
 
 // Auto redirect
 const autoRedirect = newSettingsItem("settings-lectio-auto-redirect", "checkbox", "Redirect to main page");
@@ -218,44 +210,6 @@ if (localStorage.getItem("settings-lectio-assignment-names") === "true") {
   miscContainer.contentContainer.appendChild(lectureNameContainer.section);
   miscContainer.contentContainer.appendChild(document.createElement("br"));
 
-}
-
-// Custom schedule colors
-
-const enable_colors_schedule = newSettingsItem("settings-lectio-schedule-colors-enable", "checkbox", "Enable colors");
-
-enable_colors_schedule.input.addEventListener('change', function() {
-  localStorage.setItem("settings-lectio-schedule-colors-enable", enable_colors_schedule.input.checked);
-  location.reload();
-});
-
-miscContainer.contentContainer.appendChild(enable_colors_schedule.span);
-
-if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
-  const colorContainer = newLectioContainer("Custom schedule colors", false);
-
-  const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-borders", "checkbox", "Canceled borders");
-
-  canceledBorder.input.addEventListener('change', function() {
-    localStorage.setItem("settings-lectio-schedule-canceled-borders", canceledBorder.input.checked);
-    location.reload();
-  });
-
-  colorContainer.contentContainer.appendChild(canceledBorder.span);
-
-  const fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
-  
-  for (let fag of fagList) {
-    const colorPicker = newSettingsItem(`settings-lectio-schedule-color-${fag}`, "color", fag)
-
-    colorPicker.input.addEventListener('change', function() {
-      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, colorPicker.input.value);
-    });
-
-    colorContainer.contentContainer.appendChild(colorPicker.span)
-  }
-
-  miscContainer.contentContainer.appendChild(colorContainer.section)
 }
 
 lsContentContainer.appendChild(miscContainer.section);
@@ -397,3 +351,56 @@ removeFooter.input.addEventListener('change', function() {
 uiContainer.contentContainer.appendChild(removeFooter.span);
 
 lsContentContainer.appendChild(uiContainer.section);
+
+// Schedule container
+const scheduleContainer = newLectioContainer("Schedule container", true);
+
+// Wide schedule
+const wide = newSettingsItem("settings-lectio-wide", "checkbox", "Wide schedule");
+
+wide.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-wide", wide.input.checked);
+});
+
+scheduleContainer.contentContainer.appendChild(wide.span);
+
+// Border cancel schedule
+const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-borders", "checkbox", "Canceled borders");
+
+canceledBorder.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-schedule-canceled-borders", canceledBorder.input.checked);
+  location.reload();
+});
+
+scheduleContainer.contentContainer.appendChild(canceledBorder.span);
+
+// Custom schedule colors
+
+const enable_colors_schedule = newSettingsItem("settings-lectio-schedule-colors-enable", "checkbox", "Enable colors");
+
+enable_colors_schedule.input.addEventListener('change', function() {
+  localStorage.setItem("settings-lectio-schedule-colors-enable", enable_colors_schedule.input.checked);
+  location.reload();
+});
+
+scheduleContainer.contentContainer.appendChild(enable_colors_schedule.span);
+
+if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
+  const colorContainer = newLectioContainer("Custom schedule colors", false);
+
+  const fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
+  
+  for (let fag of fagList) {
+    const colorPicker = newSettingsItem(`settings-lectio-schedule-color-${fag}`, "color", fag)
+
+    colorPicker.input.addEventListener('change', function() {
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, colorPicker.input.value);
+    });
+
+    colorContainer.contentContainer.appendChild(colorPicker.span)
+  }
+
+  scheduleContainer.contentContainer.appendChild(colorContainer.section)
+}
+
+lsContentContainer.appendChild(scheduleContainer.section);
