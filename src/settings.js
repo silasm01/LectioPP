@@ -390,6 +390,14 @@ scheduleContainer.contentContainer.appendChild(canceledBorder.span);
 const colorContainer = newLectioContainer("Custom schedule colors", false, "settings-lectio-schedule-colors-enable");
 
 if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
+  const fillRest = newSettingsItem("settings-lectio-schedule-colors-fill", "checkbox", "Schedule rest with random colors");
+
+  fillRest.input.addEventListener('change', function() {
+    localStorage.setItem("settings-lectio-schedule-colors-fill", fillRest.input.checked);
+  });
+
+  colorContainer.contentContainer.appendChild(fillRest.span);
+
   const fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"));
   
   for (let fag of fagList) {
