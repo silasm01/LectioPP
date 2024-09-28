@@ -1,3 +1,9 @@
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function fix_null(name, value) {
     var item = localStorage.getItem(name);
     if (item === null) {
@@ -66,7 +72,7 @@ fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"))
 if (fagList) {
   for (fag of fagList) {
     if (localStorage.getItem(`settings-lectio-schedule-color-${fag}`) === null) {
-      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#00" + Math.floor(Math.random()*256).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0));
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#00" + getRandomInt(50, 128).toString(16).padEnd(2, 0) + getRandomInt(50,255).toString(16).padEnd(2, 0));
     }
   }
 }
