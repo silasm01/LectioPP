@@ -1,7 +1,7 @@
 var spans = document.querySelectorAll("#s_m_Content_Content_ExerciseDI_pa .ls-std-rowblock div span :not(label)");
 spans.forEach(span => {
   span.addEventListener('change', function() {  
-    sessionStorage.setItem('reload', 'true');
+    sessionStorage.setItem('reload-assignments', 'true');
   });
 });
 
@@ -19,7 +19,7 @@ function add_toggle(id, text) {
   input.checked = get_ses_or_loc(`settings-lectio-assignment-filter-${id}`) === "true";
 
   input.addEventListener('change', function() {
-    sessionStorage.setItem('reload', 'true');
+    sessionStorage.setItem('reload-assignments', 'true');
     sessionStorage.setItem(`settings-lectio-assignment-filter-${id}`, input.checked);
     location.reload();
   });

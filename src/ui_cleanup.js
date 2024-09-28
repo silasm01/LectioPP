@@ -82,6 +82,11 @@ if (localStorage.getItem('settings-lectio-center-topbar') === 'true') {
         island.style.width = "100%"
       }
     }
+
+    var studieRetningTable = document.getElementById("s_m_Content_Content_spUge_theTable")
+    if (studieRetningTable) {
+      studieRetningTable.style.width = "-webkit-fill-available"
+    }
   }
 }
 

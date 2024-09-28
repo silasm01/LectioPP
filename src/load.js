@@ -42,13 +42,19 @@ for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-f
   fix_null(`settings-lectio-assignment-filter-${filter}`, "false");
 }
 
-if (sessionStorage.getItem('reload') === 'false') {
+if (sessionStorage.getItem('reload-assignments') === 'false') {
   for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
     sessionStorage.removeItem(`settings-lectio-assignment-filter-${filter}`);
   }
 }
 
-sessionStorage.setItem('reload', 'false');
+sessionStorage.setItem('reload-assignments', 'false');
+
+if (sessionStorage.getItem('reload-settings') === 'false') {
+  sessionStorage.clear();
+}
+
+sessionStorage.setItem('reload-settings', 'false');
 
 var fagList = document.getElementById("s_m_Content_Content_holdElementLinkList")
 

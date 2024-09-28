@@ -11,6 +11,8 @@ function newLectioContainer(name, defaultOpen = true) {
   containerHeader.addEventListener('click', function() {
     const isCollapsed = contentContainer.style.display === "none";
     contentContainer.style.display = isCollapsed ? "block" : "none";
+
+    sessionStorage.setItem(`settings-lectio-container-${name}-opened`, isCollapsed);
   });
 
   const spanHeader = document.createElement("span");
@@ -24,6 +26,11 @@ function newLectioContainer(name, defaultOpen = true) {
   contentContainer.className = "islandContent";
 
   contentContainer.style.display = defaultOpen ? "block" : "none";
+
+  const containerState = sessionStorage.getItem(`settings-lectio-container-${name}-opened`);
+  if (containerState) {
+    contentContainer.style.display = containerState === "true" ? "block" : "none";
+  }
 
   section.appendChild(containerHeader);
   section.appendChild(contentContainer);
@@ -135,6 +142,7 @@ const no_pp = newSettingsItem("settings-lectio-no-pp", "checkbox", "Hide profile
 
 no_pp.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-no-pp", no_pp.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -145,6 +153,7 @@ const autoRedirect = newSettingsItem("settings-lectio-auto-redirect", "checkbox"
 
 autoRedirect.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-auto-redirect", autoRedirect.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -165,6 +174,7 @@ const assignmentNames = newSettingsItem("settings-lectio-assignment-names", "che
 
 assignmentNames.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-assignment-names", assignmentNames.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -183,6 +193,7 @@ if (localStorage.getItem("settings-lectio-assignment-names") === "true") {
       localStorage.setItem(`settings-lectio-faglist`, JSON.stringify(newLectureNames));
       localStorage.removeItem(`settings-lectio-fagname-${lecture}`);
 
+      sessionStorage.setItem('reload-settings', 'true');
       location.reload();
     });
 
@@ -201,6 +212,7 @@ if (localStorage.getItem("settings-lectio-assignment-names") === "true") {
     const lectureName = addLecture.input.children[0].value;
     localStorage.setItem(`settings-lectio-faglist`, JSON.stringify([...lectureNames, lectureName]));
 
+    sessionStorage.setItem('reload-settings', 'true');
     location.reload();
   });
 
@@ -235,6 +247,7 @@ const enable_colors = newSettingsItem("settings-lectio-assignment-timer-colors-e
 
 enable_colors.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-assignment-timer-colors-enable", enable_colors.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -308,6 +321,7 @@ const hideTitle = newSettingsItem("settings-lectio-hide-title", "checkbox", "Hid
 
 hideTitle.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-hide-title", hideTitle.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -317,6 +331,7 @@ const singleBar = newSettingsItem("settings-lectio-single-bar", "checkbox", "Sin
 
 singleBar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-single-bar", singleBar.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -326,6 +341,7 @@ const hideTopbar = newSettingsItem("settings-lectio-hide-topbar", "checkbox", "H
 
 hideTopbar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-hide-topbar", hideTopbar.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -335,6 +351,7 @@ const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox"
 
 centerTopbar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-center-topbar", centerTopbar.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -345,6 +362,7 @@ const removeFooter = newSettingsItem("settings-lectio-remove-footer", "checkbox"
 
 removeFooter.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-remove-footer", removeFooter.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -369,6 +387,7 @@ const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-border
 
 canceledBorder.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-schedule-canceled-borders", canceledBorder.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -380,6 +399,7 @@ const enable_colors_schedule = newSettingsItem("settings-lectio-schedule-colors-
 
 enable_colors_schedule.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-schedule-colors-enable", enable_colors_schedule.input.checked);
+  sessionStorage.setItem('reload-settings', 'true');
   location.reload();
 });
 
@@ -408,6 +428,8 @@ if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
       console.log(fag)
       localStorage.removeItem(`settings-lectio-schedule-color-${fag}`);
     }
+
+    sessionStorage.setItem('reload-settings', "true")
   });
 
   colorContainer.contentContainer.appendChild(resetColors.span)
