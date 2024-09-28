@@ -398,7 +398,19 @@ if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
     });
 
     colorContainer.contentContainer.appendChild(colorPicker.span)
+
   }
+
+  const resetColors = newSettingsItem("settings-lectio-reset-colors", "button", "Reset colors");
+
+  resetColors.input.addEventListener('click', function() {
+    for (let fag of fagList) {
+      console.log(fag)
+      localStorage.removeItem(`settings-lectio-schedule-color-${fag}`);
+    }
+  });
+
+  colorContainer.contentContainer.appendChild(resetColors.span)
 
   scheduleContainer.contentContainer.appendChild(colorContainer.section)
 }
