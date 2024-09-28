@@ -66,7 +66,7 @@ fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"))
 if (fagList) {
   for (fag of fagList) {
     if (localStorage.getItem(`settings-lectio-schedule-color-${fag}`) === null) {
-      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#" + Math.floor(Math.random()*0).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0));
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#00" + Math.floor(Math.random()*256).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0));
     }
   }
 }
