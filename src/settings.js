@@ -331,7 +331,7 @@ hideTopbar.input.addEventListener('change', function() {
 
 uiContainer.contentContainer.appendChild(hideTopbar.span);
 
-const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox", "Center topbar");
+const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox", "Center Lectio");
 
 centerTopbar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-center-topbar", centerTopbar.input.checked);

@@ -22,7 +22,7 @@ fix_null("settings-lectio-hide-topbar", "false");
 fix_null("settings-lectio-center-topbar", "false");
 fix_null("settings-lectio-schedule-canceled-borders", "false");
 
-if (location.href.match(/\/lectio\/(\d+)\/*/) && localStorage.getItem("settings-lectio-school-id") === "null") {
+if (location.href.match(/\/lectio\/(\d+)\/*/)) {
   const schoolid = location.href.match(/\/(\d+)\//);
   localStorage.setItem("settings-lectio-school-id", schoolid[1]);
 } else {
@@ -66,7 +66,7 @@ fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"))
 if (fagList) {
   for (fag of fagList) {
     if (localStorage.getItem(`settings-lectio-schedule-color-${fag}`) === null) {
-      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, `#` + Math.floor(Math.random()*16777215/3).toString(16).padEnd(6,0));
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#" + Math.floor(Math.random()*0).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0) + Math.floor(Math.random()*256).toString(16).padEnd(2, 0));
     }
   }
 }

@@ -79,6 +79,7 @@ if (localStorage.getItem('settings-lectio-center-topbar') === 'true') {
     for (var island of islands) {
       if (!island.parentNode.classList.contains("ls-std-island-layout-ltr")) {
         island.style.margin = "10px auto"
+        island.style.width = "100%"
       }
     }
   }
