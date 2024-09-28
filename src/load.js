@@ -19,7 +19,7 @@ fix_null("settings-lectio-assignment-timer-colors-red", "#ff0000");
 fix_null("settings-lectio-assignment-timer-colors-yellow", "#ffff00");
 fix_null("settings-lectio-assignment-timer-colors-green", "#00ff00");
 fix_null("settings-lectio-assignment-timer-textColor", "#000000");
-fix_null("settings-lectio-assignment-names", "false");
+fix_null("settings-lectio-custom-names", "false");
 fix_null("settings-lectio-auto-redirect", "false");
 
 fix_null("settings-lectio-hide-title", "false");
@@ -78,7 +78,7 @@ fagList = JSON.parse(localStorage.getItem("settings-lectio-faglist"))
 if (fagList) {
   for (fag of fagList) {
     if (localStorage.getItem(`settings-lectio-schedule-color-${fag}`) === null) {
-      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#00" + getRandomInt(50, 128).toString(16).padEnd(2, 0) + getRandomInt(50,255).toString(16).padEnd(2, 0));
+      localStorage.setItem(`settings-lectio-schedule-color-${fag}`, "#00" + getRandomInt(50, 128).toString(16).padEnd(2, 0) + getRandomInt(50,200).toString(16).padEnd(2, 0));
     }
   }
 }
