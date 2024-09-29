@@ -16,6 +16,7 @@ function newLectioContainer(name, defaultOpen = true, button = "") {
     
     headerCheckbox.addEventListener('change', function() {
       localStorage.setItem(button, headerCheckbox.checked);
+      sessionStorage.setItem(`settings-lectio-container-${name}-opened`, headerCheckbox.checked);
       sessionStorage.setItem('reload-settings', 'true');
       location.reload();
     });
@@ -27,12 +28,15 @@ function newLectioContainer(name, defaultOpen = true, button = "") {
   }
 
   containerHeader.style.cursor = "pointer";
-  containerHeader.addEventListener('click', function() {
-    const isCollapsed = contentContainer.style.display === "none";
-    contentContainer.style.display = isCollapsed ? "block" : "none";
 
-    sessionStorage.setItem(`settings-lectio-container-${name}-opened`, isCollapsed);
-  });
+  if (localStorage.getItem(button) === "true" || !button) {
+    containerHeader.addEventListener('click', function() {
+      const isCollapsed = contentContainer.style.display === "none";
+      contentContainer.style.display = isCollapsed ? "block" : "none";
+
+      sessionStorage.setItem(`settings-lectio-container-${name}-opened`, isCollapsed);
+    });
+  }
 
   const spanHeader = document.createElement("span");
   spanHeader.innerText = name;
@@ -276,7 +280,6 @@ if (localStorage.getItem("settings-lectio-assignment-timer-colors-enable") === "
 }  
 
 assignmentsContainer.contentContainer.appendChild(assignmentTimerColors.section);
-assignmentsContainer.contentContainer.appendChild(document.createElement("br"));
 
 // Reverse assignments order
 const reverseAssignments = newSettingsItem("settings-lectio-reverse-assignments", "checkbox", "Reverse assignments order");
@@ -303,8 +306,6 @@ for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-f
 assignmentsContainer.contentContainer.appendChild(defaultFiltersContainer.section);
 
 lsContentContainer.appendChild(assignmentsContainer.section);
-
-lsContentContainer.appendChild(document.createElement("br"));
 
 // UI SETTINGS
 const uiContainer = newLectioContainer("UI");
