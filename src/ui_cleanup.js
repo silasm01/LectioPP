@@ -69,7 +69,7 @@ if (localStorage.getItem('settings-lectio-center-topbar') === 'true') {
       var childs = set.children
       childs[0].style.marginLeft = "auto"
       if (childs.length > 1) {
-        childs[1].style.marginRight = "auto"
+        childs[childs.length - 1].style.marginRight = "auto"
       } else {
         childs[0].style.marginRight = "auto"
       }

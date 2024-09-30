@@ -172,15 +172,27 @@ no_pp.input.addEventListener('change', function() {
 miscContainer.contentContainer.appendChild(no_pp.span);
 
 // Auto redirect
-const autoRedirect = newSettingsItem("settings-lectio-auto-redirect", "checkbox", "Redirect to main page");
+// const autoRedirect = newSettingsItem("settings-lectio-auto-redirect", "checkbox", "Redirect to main page");
 
-autoRedirect.input.addEventListener('change', function() {
-  localStorage.setItem("settings-lectio-auto-redirect", autoRedirect.input.checked);
-  sessionStorage.setItem('reload-settings', 'true');
-  location.reload();
-});
+// autoRedirect.input.addEventListener('change', function() {
+//   localStorage.setItem("settings-lectio-auto-redirect", autoRedirect.input.checked);
+//   sessionStorage.setItem('reload-settings', 'true');
+//   location.reload();
+// });
 
-miscContainer.contentContainer.appendChild(autoRedirect.span);
+// miscContainer.contentContainer.appendChild(autoRedirect.span);
+
+// if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
+//   const schoolid = newSettingsItem("settings-lectio-school-id", "text", "School ID");
+
+//   schoolid.input.addEventListener('change', function() {
+//     localStorage.setItem("settings-lectio-school-id", schoolid.input.value);
+//   });
+
+//   miscContainer.contentContainer.appendChild(schoolid.span);
+// }
+
+const autoRedirect = newLectioContainer("Auto redirect", false, "settings-lectio-auto-redirect");
 
 if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
   const schoolid = newSettingsItem("settings-lectio-school-id", "text", "School ID");
@@ -189,8 +201,10 @@ if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
     localStorage.setItem("settings-lectio-school-id", schoolid.input.value);
   });
 
-  miscContainer.contentContainer.appendChild(schoolid.span);
+  autoRedirect.contentContainer.appendChild(schoolid.span);
 }
+
+miscContainer.contentContainer.appendChild(autoRedirect.section);
 
 // Custom names
 const lectureNameContainer = newLectioContainer("Custom names", false, "settings-lectio-custom-names");
@@ -391,7 +405,7 @@ scheduleContainer.contentContainer.appendChild(canceledBorder.span);
 const colorContainer = newLectioContainer("Custom schedule colors", false, "settings-lectio-schedule-colors-enable");
 
 if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
-  const fillRest = newSettingsItem("settings-lectio-schedule-colors-fill", "checkbox", "Schedule rest with random colors");
+  const fillRest = newSettingsItem("settings-lectio-schedule-colors-fill", "checkbox", "Fill rest with random colors");
 
   fillRest.input.addEventListener('change', function() {
     localStorage.setItem("settings-lectio-schedule-colors-fill", fillRest.input.checked);
