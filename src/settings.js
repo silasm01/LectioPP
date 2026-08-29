@@ -307,9 +307,14 @@ assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
 // Default filters
 const defaultFiltersContainer = newLectioContainer("Default filters", true);
 
-// Assignment filters
+const assignmentFilterLabels = {
+  hideDelivered: "Hide delivered",
+  showAnswered: "Show answered"
+};
+
 for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
-  const filterItem = newSettingsItem(`settings-lectio-assignment-filter-${filter}`, "checkbox", filter);
+  const filterLabel = assignmentFilterLabels[filter] || filter;
+  const filterItem = newSettingsItem(`settings-lectio-assignment-filter-${filter}`, "checkbox", filterLabel);
   filterItem.input.addEventListener('change', function() {
     localStorage.setItem(`settings-lectio-assignment-filter-${filter}`, filterItem.input.checked);
   });

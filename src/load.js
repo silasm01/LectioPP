@@ -37,15 +37,24 @@ if (location.href.match(/\/lectio\/(\d+)\/*/)) {
   fix_null("settings-lectio-school-id", null);
 }
 
-fix_null("settings-lectio-assignment-filters", JSON.stringify(
-  ["hideDelivered", "showAnswered"]
-))
-for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
+let assignmentFilters = JSON.parse(localStorage.getItem("settings-lectio-assignment-filters") || "[]");
+assignmentFilters = assignmentFilters.filter(filter => ["hideDelivered", "showAnswered"].includes(filter));
+assignmentFilters = ["hideDelivered", "showAnswered"].filter(filter => !assignmentFilters.includes(filter) || assignmentFilters.includes(filter));
+
+if (!assignmentFilters.includes("hideDelivered")) assignmentFilters.push("hideDelivered");
+if (!assignmentFilters.includes("showAnswered")) assignmentFilters.push("showAnswered");
+
+localStorage.setItem("settings-lectio-assignment-filters", JSON.stringify(assignmentFilters));
+for (let filter of assignmentFilters) {
   fix_null(`settings-lectio-assignment-filter-${filter}`, "false");
 }
 
+for (let oldFilter of ["hideMissing"]) {
+  localStorage.removeItem(`settings-lectio-assignment-filter-${oldFilter}`);
+}
+
 if (sessionStorage.getItem('reload-assignments') === 'false') {
-  for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
+  for (let filter of assignmentFilters) {
     sessionStorage.removeItem(`settings-lectio-assignment-filter-${filter}`);
   }
 }
